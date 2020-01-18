@@ -1,0 +1,12 @@
+{
+  "name": "MEAN Contact List",
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "mongolab"
+  ]
+}
