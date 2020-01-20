@@ -77,12 +77,13 @@ app.get("/api/contacts/:id", function(req, res) {
 
 app.put("/api/contacts/:id", function(req, res) {
   var updateDoc = req.body;
+  delete updateDoc._id;
 
   db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update contact");
     } else {
-      //updateDoc["_id"] = req.params.id;
+      updateDoc._id = req.params.id;
       res.status(200).json(updateDoc);
     }
   });
