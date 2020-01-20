@@ -33,18 +33,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb+srv://ghalciva:g
   });
 });
 
-// CONTACTS API ROUTES BELOW
-
-// Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
   res.status(code || 500).json({"error": message});
 }
-
-/*  "/api/contacts"
- *    GET: finds all contacts
- *    POST: creates a new contact
- */
 
 app.get("/api/contacts", function(req, res) {
   db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
@@ -85,13 +77,13 @@ app.get("/api/contacts/:id", function(req, res) {
 
 app.put("/api/contacts/:id", function(req, res) {
   var updateDoc = req.body;
-  delete updateDoc._id;
+  delete updateDoc["_id"];
 
   db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update contact");
     } else {
-      updateDoc._id = req.params.id;
+      updateDoc["_id"] = req.params.id;
       res.status(200).json(updateDoc);
     }
   });
