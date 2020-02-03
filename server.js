@@ -16,7 +16,7 @@ app.use(express.static(distDir));
 var db;
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb+srv://ghalciva:Doubles501.@cluster0-3htsl.mongodb.net/test?retryWrites=true&w=majority", function (err, client) {
+mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://ghalciva:gloria@cluster0-shard-00-00-3htsl.mongodb.net:27017,cluster0-shard-00-01-3htsl.mongodb.net:27017,cluster0-shard-00-02-3htsl.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority", function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
